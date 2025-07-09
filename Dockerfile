@@ -30,7 +30,8 @@ RUN apk update && \
     python3 \
     py3-pip \
     aws-cli \
-    go
+    go \
+    screen
 
 # Install additional Python debugging tools and AWS SDK for Python
 RUN pip3 install --no-cache-dir httpie boto3
