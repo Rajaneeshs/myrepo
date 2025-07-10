@@ -1,0 +1,8 @@
+replicaCount: 1
+image:
+  repository: devops-debug-tools
+  tag: latest
+  pullPolicy: IfNotPresent
+serviceAccount:
+  create: true
+  name: ""

@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: { { include "devops-debug-tools.fullname" . } }
+  labels: { { - include "devops-debug-tools.labels" . | nindent 4 } }
+spec:
+  replicas: { { .Values.replicaCount } }
+  selector:
+    matchLabels:
+      { { - include "devops-debug-tools.selectorLabels" . | nindent 6 } }
+  template:
+    metadata:
+      labels:
+        { { - include "devops-debug-tools.selectorLabels" . | nindent 8 } }
+    spec:
+      serviceAccountName:
+        { { include "devops-debug-tools.serviceAccountName" . } }
+      containers:
+        - name: devops-debug-tools
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: { { .Values.image.pullPolicy } }
+          command: ["sh"]
+          tty: true
+          stdin: true
